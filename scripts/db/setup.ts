@@ -18,9 +18,19 @@ function withEmbeddingDimension(sql: string): string {
   return sql.replaceAll("__EMBEDDING_DIM__", String(embeddingDimension));
 }
 
+function splitSqlStatements(sql: string): string[] {
+  return sql
+    .split(/;\s*\n/g)
+    .map((statement) => statement.trim())
+    .filter(Boolean)
+    .map((statement) => (statement.endsWith(";") ? statement : `${statement};`));
+}
+
 async function readMigrations(migrationsDir: string): Promise<Array<{ fileName: string; sql: string }>> {
   const files = (await fs.readdir(migrationsDir))
     .filter((fileName) => fileName.endsWith(".sql"))
+    .filter((fileName) => !fileName.startsWith("._"))
+    .filter((fileName) => !fileName.startsWith("."))
     .sort((left, right) => left.localeCompare(right));
 
   const migrations: Array<{ fileName: string; sql: string }> = [];
@@ -60,7 +70,10 @@ async function setupDatabase(): Promise<void> {
     }
 
     for (const migration of migrations) {
-      await pool.query(migration.sql);
+      const statements = splitSqlStatements(migration.sql);
+      for (const statement of statements) {
+        await pool.query(statement);
+      }
       console.log(`Applied migration: ${migration.fileName}`);
     }
   } finally {
