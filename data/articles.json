@@ -1,0 +1,147 @@
+[
+  {
+    "id": "article_ic9ozsg1_mptvdg7u",
+    "createdAt": "2026-05-31T14:23:03.258Z",
+    "updatedAt": "2026-05-31T14:23:03.258Z",
+    "title": "Legacy Refund Terms (Deprecated)",
+    "sourceUrl": "https://docs.supportopsai.dev/legacy/refund-terms",
+    "tags": [
+      "billing",
+      "refund",
+      "deprecated",
+      "legacy"
+    ],
+    "body": "Legacy contracts signed before January 1, 2024 had a 14-day refund window.\n\nThese terms do not apply to new self-serve signups.\n\nIf a customer cites legacy terms but contract status is unclear, escalate to billing operations."
+  },
+  {
+    "id": "article_efm7bue2_mptvdg6c",
+    "createdAt": "2026-05-31T14:23:03.204Z",
+    "updatedAt": "2026-05-31T14:23:03.204Z",
+    "title": "Workspace Permissions",
+    "sourceUrl": "https://docs.supportopsai.dev/accounts/workspace-permissions",
+    "tags": [
+      "account",
+      "roles",
+      "permissions"
+    ],
+    "body": "Workspace roles are Owner, Admin, Agent, and Viewer.\n\nOnly Owners and Admins can modify billing settings.\n\nOnly Owners can delete a workspace or transfer ownership.\n\nAgents can manage tickets but cannot change identity or billing configuration."
+  },
+  {
+    "id": "article_qpmaluu2_mptvdg5w",
+    "createdAt": "2026-05-31T14:23:03.188Z",
+    "updatedAt": "2026-05-31T14:23:03.188Z",
+    "title": "API Rate Limits",
+    "sourceUrl": "https://docs.supportopsai.dev/api/rate-limits",
+    "tags": [
+      "api",
+      "limits",
+      "developer"
+    ],
+    "body": "Public API requests are limited per workspace and plan tier.\n\nStandard plan: 120 requests per minute.\n\nGrowth plan: 600 requests per minute.\n\nEnterprise plan: 1200 requests per minute with burst allowances by contract."
+  },
+  {
+    "id": "article_tvfiljo6_mptvdg5i",
+    "createdAt": "2026-05-31T14:23:03.174Z",
+    "updatedAt": "2026-05-31T14:23:03.174Z",
+    "title": "Account Deletion",
+    "sourceUrl": "https://docs.supportopsai.dev/accounts/account-deletion",
+    "tags": [
+      "account",
+      "deletion",
+      "privacy"
+    ],
+    "body": "Only workspace owners can permanently delete a workspace account.\n\nDeletion is initiated from Settings > Workspace > Delete workspace.\n\nAfter deletion is confirmed, login is disabled immediately.\n\nAll workspace data follows the data retention and purge timeline policy."
+  },
+  {
+    "id": "article_cz6knhi0_mptvdg54",
+    "createdAt": "2026-05-31T14:23:03.160Z",
+    "updatedAt": "2026-05-31T14:23:03.160Z",
+    "title": "SLA Tiers",
+    "sourceUrl": "https://docs.supportopsai.dev/enterprise/sla",
+    "tags": [
+      "sla",
+      "enterprise",
+      "support"
+    ],
+    "body": "Standard plan: best-effort support during business hours, no uptime SLA.\n\nGrowth plan: 99.9% monthly uptime SLA with next-business-day response for critical tickets.\n\nEnterprise plan: 99.95% monthly uptime SLA with 1-hour response for critical severity incidents.\n\nSLA credits require a support request within 30 days of the incident month."
+  },
+  {
+    "id": "article_9ce7yv1k_mptvdg4r",
+    "createdAt": "2026-05-31T14:23:03.147Z",
+    "updatedAt": "2026-05-31T14:23:03.147Z",
+    "title": "Password Reset",
+    "sourceUrl": "https://docs.supportopsai.dev/accounts/password-reset",
+    "tags": [
+      "account",
+      "password",
+      "security"
+    ],
+    "body": "Users can reset passwords from the sign-in page using the Forgot password link.\n\nPassword reset links expire after 60 minutes and can only be used once.\n\nIf SSO is enforced for a workspace, password reset is disabled for managed users.\n\nAdmins can require all members to re-authenticate from the Security settings page."
+  },
+  {
+    "id": "article_xngm9uvf_mptvdg4g",
+    "createdAt": "2026-05-31T14:23:03.136Z",
+    "updatedAt": "2026-05-31T14:23:03.136Z",
+    "title": "Billing Failure Recovery",
+    "sourceUrl": "https://docs.supportopsai.dev/billing/payment-failures",
+    "tags": [
+      "billing",
+      "payment",
+      "invoices"
+    ],
+    "body": "If a renewal charge fails, the system retries payment up to 4 times over 7 days.\n\nDuring retry mode, workspace access remains active.\n\nIf all retries fail, the workspace enters read-only mode until payment is resolved.\n\nBilling admins receive email notifications after each failed attempt."
+  },
+  {
+    "id": "article_8hyhumw4_mptvdg47",
+    "createdAt": "2026-05-31T14:23:03.127Z",
+    "updatedAt": "2026-05-31T14:23:03.127Z",
+    "title": "Data Retention",
+    "sourceUrl": "https://docs.supportopsai.dev/security/data-retention",
+    "tags": [
+      "security",
+      "retention",
+      "compliance"
+    ],
+    "body": "Ticket content and conversation logs are retained while the workspace is active.\n\nAfter account deletion, customer data is queued for deletion within 30 days.\n\nEncrypted backups may persist for up to 14 additional days before automatic purge.\n\nEnterprise customers can request a custom retention policy through support."
+  },
+  {
+    "id": "article_ijow0xi3_mptvdg3y",
+    "createdAt": "2026-05-31T14:23:03.118Z",
+    "updatedAt": "2026-05-31T14:23:03.118Z",
+    "title": "Enterprise SSO",
+    "sourceUrl": "https://docs.supportopsai.dev/security/enterprise-sso",
+    "tags": [
+      "security",
+      "enterprise",
+      "sso",
+      "saml"
+    ],
+    "body": "SAML-based single sign-on is available on the Enterprise plan.\n\nSupported identity providers include Okta, Microsoft Entra ID, and Google Workspace.\n\nJust-in-time provisioning is supported when SAML attributes include email and name.\n\nSCIM provisioning is available as an add-on for Enterprise accounts."
+  },
+  {
+    "id": "article_i8ywfsa8_mptvdg3q",
+    "createdAt": "2026-05-31T14:23:03.110Z",
+    "updatedAt": "2026-05-31T14:23:03.110Z",
+    "title": "Annual Plan Cancellation",
+    "sourceUrl": "https://docs.supportopsai.dev/billing/annual-cancellation",
+    "tags": [
+      "billing",
+      "annual",
+      "cancellation"
+    ],
+    "body": "Annual plans can be canceled at any time from the billing settings page.\n\nCancellation stops auto-renewal at the end of the current annual term.\n\nAnnual plan fees are prepaid and are not prorated after the 30-day refund window.\n\nWorkspace access and features remain active until the term end date."
+  },
+  {
+    "id": "article_as04h695_mptvdg3e",
+    "createdAt": "2026-05-31T14:23:03.098Z",
+    "updatedAt": "2026-05-31T14:23:03.098Z",
+    "title": "Refund Policy",
+    "sourceUrl": "https://docs.supportopsai.dev/billing/refunds",
+    "tags": [
+      "billing",
+      "refund",
+      "policy"
+    ],
+    "body": "Customers can request a full refund within 30 calendar days of the initial purchase date for monthly and annual self-serve plans.\n\nRefund requests submitted after 30 days are not eligible unless there is a duplicate charge or a confirmed billing system error.\n\nRefunds are returned to the original payment method within 5 to 10 business days after approval.\n\nAdd-on usage fees are non-refundable once consumed."
+  }
+]
