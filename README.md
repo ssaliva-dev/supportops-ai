@@ -170,6 +170,18 @@ npm run build      # production build check
    - Push `feature/*` branches for Preview Deployments.
    - Merge to `main` for Production Deployment.
 
+### GitHub Actions Fallback Pipeline
+If direct Vercel Git integration is unavailable, use `.github/workflows/vercel-deploy.yml`.
+
+Required GitHub repository secrets:
+- `VERCEL_TOKEN` (classic personal token from Vercel Account Settings)
+- `VERCEL_ORG_ID` (from `.vercel/project.json`)
+- `VERCEL_PROJECT_ID` (from `.vercel/project.json`)
+
+Behavior:
+- Pull requests create preview deployments.
+- Pushes to `main` deploy production.
+
 ### Live Ops / Hotfix Flow
 1. Validate deployment:
    - `GET /api/health` returns `ok: true` and `backend: "postgres"`.
