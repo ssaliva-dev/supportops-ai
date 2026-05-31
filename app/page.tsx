@@ -1,5 +1,4 @@
 import { LiveDemo } from "@/components/agent/live-demo";
-import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import { StatCard } from "@/components/ui/stat-card";
 import { TitleWithInfo } from "@/components/ui/title-with-info";
@@ -29,9 +28,6 @@ export default async function HomePage() {
   return (
     <div className="space-y-6">
       <Card className="space-y-4 border-slate-300 bg-gradient-to-br from-slate-900 to-sky-900 text-white">
-        <Badge tone="info" className="w-fit bg-white/20 text-white">
-          Portfolio Project
-        </Badge>
         <TitleWithInfo
           as="h1"
           className="text-3xl font-semibold tracking-tight"

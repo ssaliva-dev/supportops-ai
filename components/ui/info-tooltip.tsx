@@ -14,7 +14,7 @@ export function InfoTooltip({ text, className, iconClassName, tooltipClassName }
         type="button"
         aria-label="What was built and why"
         className={cn(
-          "peer inline-flex h-4 w-4 items-center justify-center rounded-full border border-sky-700 bg-sky-600 text-[10px] font-semibold text-white shadow-sm outline-none transition hover:bg-sky-500 focus-visible:ring-2 focus-visible:ring-sky-500",
+          "peer inline-flex h-4 w-4 items-center justify-center rounded-full border border-sky-700 bg-sky-600 text-[10px] font-semibold lowercase normal-case text-white shadow-sm outline-none transition hover:bg-sky-500 focus-visible:ring-2 focus-visible:ring-sky-500",
           iconClassName,
         )}
       >

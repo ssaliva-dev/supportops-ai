@@ -47,6 +47,13 @@ export function EscalationQueue() {
     void loadEscalations();
   }, []);
 
+  useEffect(() => {
+    if (!draftId) {
+      return;
+    }
+    document.getElementById("kb-article-draft")?.scrollIntoView({ behavior: "smooth", block: "start" });
+  }, [draftId]);
+
   async function markResolved(id: string) {
     await fetch(`/api/escalations/${id}/resolve`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({}) });
     await loadEscalations(true);
@@ -119,11 +126,13 @@ export function EscalationQueue() {
               </div>
               <p className="text-sm text-slate-700">{item.answer}</p>
               <div className="flex flex-wrap gap-2">
-                <Button variant="secondary" onClick={() => markResolved(item.id)}>
+                <Button type="button" variant="secondary" onClick={() => markResolved(item.id)}>
                   Mark Resolved
                 </Button>
                 <Button
-                  variant="ghost"
+                  type="button"
+                  variant={draftId === item.id ? "secondary" : "ghost"}
+                  aria-pressed={draftId === item.id}
                   onClick={() => {
                     setDraftId(item.id);
                     setTitle(`Follow-up: ${item.question.slice(0, 70)}`);
@@ -131,7 +140,7 @@ export function EscalationQueue() {
                     setSourceUrl("https://docs.supportopsai.dev/internal/escalation-resolution");
                   }}
                 >
-                  Add Missing KB Article
+                  {draftId === item.id ? "Adding KB Article..." : "Add Missing KB Article"}
                 </Button>
               </div>
             </Card>
@@ -140,7 +149,7 @@ export function EscalationQueue() {
       )}
 
       {draftId ? (
-        <Card className="space-y-3 border-sky-200">
+        <Card id="kb-article-draft" className="space-y-3 border-sky-200">
           <TitleWithInfo
             as="h3"
             className="text-base font-semibold text-slate-900"
