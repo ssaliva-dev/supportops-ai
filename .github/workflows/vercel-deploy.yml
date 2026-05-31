@@ -1,10 +1,16 @@
 name: Deploy to Vercel
 
 on:
-  push:
-    branches:
-      - main
-  pull_request:
+  workflow_dispatch:
+    inputs:
+      target:
+        description: Deploy target
+        required: true
+        type: choice
+        default: preview
+        options:
+          - preview
+          - production
 
 concurrency:
   group: vercel-${{ github.ref }}
@@ -12,7 +18,7 @@ concurrency:
 
 jobs:
   deploy-preview:
-    if: github.event_name == 'pull_request'
+    if: github.event_name == 'workflow_dispatch' && github.event.inputs.target == 'preview'
     runs-on: ubuntu-latest
     env:
       VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
@@ -42,7 +48,7 @@ jobs:
           curl --fail --silent --show-error "${{ steps.deploy_preview.outputs.deployment_url }}/api/health" > /dev/null
 
   deploy-production:
-    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    if: github.event_name == 'workflow_dispatch' && github.event.inputs.target == 'production'
     runs-on: ubuntu-latest
     env:
       VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
