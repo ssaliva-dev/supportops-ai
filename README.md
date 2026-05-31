@@ -137,6 +137,7 @@ npm run build      # production build check
 - `OPENAI_CHAT_MODEL` (optional, default `gpt-4.1-mini`)
 - `OPENAI_EMBEDDING_MODEL` (optional, default `text-embedding-3-small`)
 - `STORE_BACKEND` (`json` or `postgres`, default auto-detect)
+- `SUPPORTOPS_DATA_DIR` (optional JSON backend path override; defaults to `/tmp/supportops-data` on Vercel)
 - `DATABASE_URL` (required for `postgres` backend)
 - `PGVECTOR_EMBEDDING_DIM` (optional, default `1536`)
 - `POSTGRES_SSL` (optional, `true` for hosted SSL-only Postgres)
@@ -169,7 +170,7 @@ npm run build      # production build check
 
 ## Deployment Notes
 - Works on Vercel/Node hosts with either backend:
-  - `json`: easiest demo mode (ephemeral on many hosts)
+  - `json`: easiest demo mode (ephemeral on many hosts). On Vercel, writes use `/tmp/supportops-data` to avoid read-only filesystem errors.
   - `postgres`: persistent live mode (recommended for portfolio link)
 - For Postgres mode: set `DATABASE_URL`, `STORE_BACKEND=postgres`, then run `npm run db:setup` once.
 - Keep `OPENAI_API_KEY` in platform-managed secrets.

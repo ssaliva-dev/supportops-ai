@@ -195,7 +195,11 @@ export async function runSupportAgent(question: string): Promise<{ answer: Agent
     createdAt: new Date().toISOString(),
   };
 
-  await runStore.saveTrace(trace);
+  try {
+    await runStore.saveTrace(trace);
+  } catch (error) {
+    console.error("Failed to save trace", error);
+  }
 
   if (shouldEscalate) {
     const escalation: Escalation = {
@@ -208,7 +212,11 @@ export async function runSupportAgent(question: string): Promise<{ answer: Agent
       citations: answer.citations,
       resolved: false,
     };
-    await runStore.enqueueEscalation(escalation);
+    try {
+      await runStore.enqueueEscalation(escalation);
+    } catch (error) {
+      console.error("Failed to enqueue escalation", error);
+    }
   }
 
   return { answer, trace };

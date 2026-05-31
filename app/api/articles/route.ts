@@ -7,8 +7,15 @@ import { embedTexts } from "@/lib/ai/embeddings";
 export const runtime = "nodejs";
 
 export async function GET() {
-  const articles = await knowledgeStore.listArticles();
-  return NextResponse.json({ articles });
+  try {
+    const articles = await knowledgeStore.listArticles();
+    return NextResponse.json({ articles });
+  } catch (error) {
+    return NextResponse.json(
+      { error: "Failed to load articles.", detail: (error as Error).message },
+      { status: 500 },
+    );
+  }
 }
 
 export async function POST(request: Request) {
