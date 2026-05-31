@@ -28,8 +28,9 @@ export function CitationList({ citations }: CitationListProps) {
       />
       <ul className="space-y-3">
         {citations.map((citation) => {
-          const href = toSourceDocumentHref(citation.sourceUrl);
-          const isInternalSourceDoc = href.startsWith("/source-docs/");
+          const baseHref = toSourceDocumentHref(citation.sourceUrl);
+          const isInternalSourceDoc = baseHref.startsWith("/source-docs/");
+          const href = isInternalSourceDoc ? `${baseHref}?src=${encodeURIComponent(citation.chunkId)}` : baseHref;
 
           return (
             <li key={citation.chunkId} className="rounded-lg border border-slate-200 bg-slate-50 p-3">
