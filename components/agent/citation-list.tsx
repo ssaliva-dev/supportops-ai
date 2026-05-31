@@ -33,7 +33,14 @@ export function CitationList({ citations }: CitationListProps) {
               <Badge tone="info">score {citation.score.toFixed(2)}</Badge>
             </div>
             <p className="text-sm text-slate-700">{citation.snippet}</p>
-            <p className="mt-2 text-xs text-slate-500">{citation.sourceUrl}</p>
+            <a
+              href={citation.sourceUrl}
+              target="_blank"
+              rel="noreferrer noopener"
+              className="mt-2 inline-block text-xs font-medium text-sky-700 underline underline-offset-2 hover:text-sky-600"
+            >
+              {citation.sourceUrl}
+            </a>
           </li>
         ))}
       </ul>
