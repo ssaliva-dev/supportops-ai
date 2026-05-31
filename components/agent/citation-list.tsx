@@ -1,5 +1,7 @@
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
+import { TitleWithInfo } from "@/components/ui/title-with-info";
+import { TITLE_EXPLANATIONS } from "@/lib/content/title-explanations";
 import type { Citation } from "@/types/domain";
 
 type CitationListProps = {
@@ -17,7 +19,12 @@ export function CitationList({ citations }: CitationListProps) {
 
   return (
     <Card className="space-y-4">
-      <h3 className="text-sm font-semibold uppercase tracking-wide text-slate-500">Cited Sources</h3>
+      <TitleWithInfo
+        as="h3"
+        className="text-sm font-semibold uppercase tracking-wide text-slate-500"
+        title="Cited Sources"
+        info={TITLE_EXPLANATIONS.citation_panel}
+      />
       <ul className="space-y-3">
         {citations.map((citation) => (
           <li key={citation.chunkId} className="rounded-lg border border-slate-200 bg-slate-50 p-3">

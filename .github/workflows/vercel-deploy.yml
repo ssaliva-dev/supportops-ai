@@ -31,7 +31,15 @@ jobs:
         run: vercel build --token=${{ secrets.VERCEL_TOKEN }}
 
       - name: Deploy Preview
-        run: vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }}
+        id: deploy_preview
+        run: |
+          DEPLOYMENT_URL=$(vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }})
+          echo "deployment_url=$DEPLOYMENT_URL" >> "$GITHUB_OUTPUT"
+
+      - name: Smoke Check Preview
+        run: |
+          curl --fail --silent --show-error "${{ steps.deploy_preview.outputs.deployment_url }}/" > /dev/null
+          curl --fail --silent --show-error "${{ steps.deploy_preview.outputs.deployment_url }}/api/health" > /dev/null
 
   deploy-production:
     if: github.ref == 'refs/heads/main' && github.event_name == 'push'
@@ -53,4 +61,12 @@ jobs:
         run: vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
 
       - name: Deploy Production
-        run: vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }}
+        id: deploy_production
+        run: |
+          DEPLOYMENT_URL=$(vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }})
+          echo "deployment_url=$DEPLOYMENT_URL" >> "$GITHUB_OUTPUT"
+
+      - name: Smoke Check Production
+        run: |
+          curl --fail --silent --show-error "${{ steps.deploy_production.outputs.deployment_url }}/" > /dev/null
+          curl --fail --silent --show-error "${{ steps.deploy_production.outputs.deployment_url }}/api/health" > /dev/null

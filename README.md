@@ -2,6 +2,10 @@
 
 Production-style AI support agent portfolio project with source-grounded RAG answers, deterministic evals, observability traces, and human-in-the-loop escalation.
 
+## Live Demo
+- Production URL: `https://supportops-ai-delta.vercel.app`
+- Health endpoint: `/api/health`
+
 ## Project Overview
 SupportOps AI is a full-stack support assistant that answers only from retrieved policy context, cites sources, and escalates uncertain cases. It demonstrates practical AI engineering patterns used in real production systems.
 
@@ -75,6 +79,12 @@ Included cases cover:
 - Conflicting-doc escalation
 - Legal/financial guarantee escalation
 
+### Portfolio Eval Targets
+- Pass rate: `>= 0.65`
+- Retrieval hit rate: `>= 0.65`
+- Escalation accuracy: `>= 0.75`
+- Command: `npm run evals:check`
+
 ## Repository Structure
 - app/: Next.js routes/pages and API handlers
 - components/: reusable dashboard and workflow components
@@ -120,7 +130,7 @@ npm run build      # production build check
 - `/support-agent` agent workbench + trace panel
 - `/evaluation-studio` deterministic eval runner + summary metrics
 - `/escalation-queue` unresolved escalations + resolution workflows
-- `/api/health` runtime health check (`ok`, backend, timestamp)
+- `/api/health` runtime health check (`ok`, `ready`, `backend`, `warnings`, timestamp)
 
 ## Environment Variables
 - `OPENAI_API_KEY` (optional but recommended)
@@ -136,6 +146,7 @@ npm run build      # production build check
 - `docs/screenshots/support-agent-trace.png`
 - `docs/screenshots/eval-studio.png`
 - `docs/screenshots/escalation-queue.png`
+- Capture checklist: `docs/portfolio-checklist.md`
 
 ## 60-Second Demo Script
 1. Open landing page and ask a refund/cancellation question.
@@ -144,6 +155,17 @@ npm run build      # production build check
 4. Open Evaluation Studio and run evals.
 5. Show pass rate and escalation accuracy metrics.
 6. Open Escalation Queue and create a KB article from a queued case.
+
+## 3-Minute Interview Talk Track
+1. Problem framing: support AI needs grounded answers, not plausible text.
+2. Architecture: retrieval, generation, deterministic scoring, and escalation are separated by module.
+3. Reliability controls: citation requirements, conflict detection, low-confidence escalation.
+4. Observability: each run stores rewritten query, retrieval scores, token/cost, and latency.
+5. Operations: CI gates, deployment smoke checks, and rollback workflow.
+6. Outcome: a recruiter can inspect both UX and engineering evidence in one app.
+
+## Sample Trace Artifact
+- `docs/sample-trace.json` contains a representative run object used in interviews and portfolio walkthroughs.
 
 ## Deployment Notes
 - Works on Vercel/Node hosts with either backend:
@@ -192,6 +214,23 @@ Behavior:
    - Merge into `main`.
 3. If regression occurs:
    - Roll back from Vercel Deployments.
+
+## CI / Deployment Quality Gates
+- CI workflow: `.github/workflows/ci.yml`
+  - `npm run lint`
+  - `npm test`
+  - `npm run build`
+  - `npm run evals:check` (non-blocking warning initially)
+- Deploy workflow: `.github/workflows/vercel-deploy.yml`
+  - preview deploy on PR
+  - production deploy on `main`
+  - post-deploy smoke checks for `/` and `/api/health`
+
+## Known Limitations
+- `STORE_BACKEND=json` in production is non-durable and may reset between deployments/instances.
+- For stable portfolio demos, use `STORE_BACKEND=postgres` with `DATABASE_URL` and run:
+  - `npm run db:setup`
+  - `npm run seed`
 
 ## Future Improvements
 - Hybrid retrieval in-database (pgvector + keyword ranking)

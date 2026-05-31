@@ -1,4 +1,6 @@
 import { Card } from "@/components/ui/card";
+import { TitleWithInfo } from "@/components/ui/title-with-info";
+import { TITLE_EXPLANATIONS } from "@/lib/content/title-explanations";
 import type { Trace } from "@/types/domain";
 
 type TracePanelProps = {
@@ -16,7 +18,12 @@ export function TracePanel({ trace }: TracePanelProps) {
 
   return (
     <Card className="space-y-3">
-      <h3 className="text-sm font-semibold uppercase tracking-wide text-slate-500">Trace</h3>
+      <TitleWithInfo
+        as="h3"
+        className="text-sm font-semibold uppercase tracking-wide text-slate-500"
+        title="Trace"
+        info={TITLE_EXPLANATIONS.trace_panel}
+      />
       <div className="grid gap-3 text-sm text-slate-700 md:grid-cols-2">
         <p>
           <span className="font-semibold">Rewritten query:</span> {trace.rewrittenQuery}

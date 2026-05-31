@@ -49,3 +49,29 @@ export async function resetDataStore(): Promise<void> {
 export function getStoreBackend(): StoreBackend {
   return backend;
 }
+
+export function isEphemeralBackend(): boolean {
+  return backend === "json";
+}
+
+export function getStoreWarnings(input?: {
+  nodeEnv?: string;
+  vercelEnv?: string;
+}): string[] {
+  const nodeEnv = input?.nodeEnv ?? process.env.NODE_ENV;
+  const vercelEnv = input?.vercelEnv ?? process.env.VERCEL_ENV;
+  const isProd = nodeEnv === "production" || vercelEnv === "production";
+  const warnings: string[] = [];
+
+  if (backend === "json" && isProd) {
+    warnings.push(
+      "JSON store is active in production. Data may be ephemeral across deployments and instances.",
+    );
+  }
+
+  if (backend === "postgres" && !process.env.DATABASE_URL) {
+    warnings.push("Postgres backend is selected but DATABASE_URL is missing.");
+  }
+
+  return warnings;
+}

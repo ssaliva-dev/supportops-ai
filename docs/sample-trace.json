@@ -1,0 +1,26 @@
+{
+  "id": "trace_demo_20260531",
+  "question": "Can I cancel my annual plan and get a prorated refund?",
+  "rewrittenQuery": "cancel annual plan prorated refund policy",
+  "retrievalMode": "embedding",
+  "retrieval": {
+    "selectedChunkIds": ["chunk_annual_01", "chunk_refund_03", "chunk_billing_02"],
+    "scores": {
+      "chunk_annual_01": 0.8123,
+      "chunk_refund_03": 0.7661,
+      "chunk_billing_02": 0.7118
+    },
+    "topScore": 0.8123,
+    "averageScore": 0.7634,
+    "hasConflict": false
+  },
+  "model": "gpt-4.1-mini",
+  "latencyMs": 842,
+  "tokenUsage": {
+    "prompt": 1089,
+    "completion": 146,
+    "total": 1235
+  },
+  "estimatedCostUsd": 0.00067,
+  "createdAt": "2026-05-31T14:45:00.000Z"
+}

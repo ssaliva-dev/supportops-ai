@@ -1,5 +1,6 @@
 export type TitleInfoKey =
   | "landing_overview"
+  | "landing_demo"
   | "knowledge_base_page"
   | "knowledge_base_add"
   | "knowledge_base_table"
@@ -8,11 +9,15 @@ export type TitleInfoKey =
   | "evaluation_page"
   | "evaluation_runner"
   | "escalation_page"
-  | "escalation_create_article";
+  | "escalation_create_article"
+  | "trace_panel"
+  | "citation_panel";
 
 export const TITLE_EXPLANATIONS: Record<TitleInfoKey, string> = {
   landing_overview:
     "Built a production-style AI support demo that combines retrieval-augmented generation, source citations, deterministic evaluations, and escalation workflows so support answers stay verifiable.",
+  landing_demo:
+    "Built this live demo entrypoint so portfolio reviewers can immediately test end-to-end behavior: grounded answer generation, citations, confidence scoring, latency, cost, and escalation outcomes.",
   knowledge_base_page:
     "Built a manual knowledge ingestion page so policy content can be added and updated quickly, then chunked and indexed for retrieval without redeploying the app.",
   knowledge_base_add:
@@ -31,4 +36,8 @@ export const TITLE_EXPLANATIONS: Record<TitleInfoKey, string> = {
     "Built the escalation queue to capture uncertain or risky responses so humans can resolve cases and feed missing knowledge back into the system.",
   escalation_create_article:
     "Built this follow-up form so escalated cases can be converted into new knowledge-base documentation, closing gaps that caused escalation.",
+  trace_panel:
+    "Built this trace panel to expose retrieval and model internals for debugging, performance analysis, and interview walkthroughs of production AI behavior.",
+  citation_panel:
+    "Built this citation panel to show exactly which source snippets informed the answer, making support responses auditable and source-grounded.",
 };

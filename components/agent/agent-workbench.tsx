@@ -7,6 +7,7 @@ import { TracePanel } from "@/components/agent/trace-panel";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { StatCard } from "@/components/ui/stat-card";
 import { Textarea } from "@/components/ui/textarea";
 import { TitleWithInfo } from "@/components/ui/title-with-info";
 import { TITLE_EXPLANATIONS } from "@/lib/content/title-explanations";
@@ -72,18 +73,24 @@ export function AgentWorkbench() {
         </Card>
 
         {result ? (
-          <Card className="space-y-3">
-            <div className="flex items-center gap-2">
+          <Card className="space-y-4">
+            <div className="flex flex-wrap items-center gap-2">
               <h3 className="text-sm font-semibold uppercase tracking-wide text-slate-500">Answer</h3>
               {result.answer.shouldEscalate ? <Badge tone="warning">Escalate</Badge> : <Badge tone="success">Clear</Badge>}
             </div>
             <p className="text-sm leading-6 text-slate-800">{result.answer.answer}</p>
+            <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+              <StatCard label="Confidence" value={result.answer.confidence.toFixed(2)} />
+              <StatCard label="Latency" value={`${result.trace.latencyMs} ms`} />
+              <StatCard label="Estimated Cost" value={`$${result.trace.estimatedCostUsd.toFixed(6)}`} />
+              <StatCard label="Model" value={result.trace.model} />
+            </div>
             <div className="grid gap-2 text-sm text-slate-700 sm:grid-cols-2">
               <p>
-                <span className="font-semibold">Confidence:</span> {result.answer.confidence.toFixed(2)}
+                <span className="font-semibold">Escalation reason:</span> {result.answer.escalationReason ?? "Not required"}
               </p>
               <p>
-                <span className="font-semibold">Escalation reason:</span> {result.answer.escalationReason ?? "Not required"}
+                <span className="font-semibold">Retrieved chunks:</span> {result.trace.retrieval.selectedChunkIds.length}
               </p>
             </div>
           </Card>

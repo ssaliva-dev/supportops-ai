@@ -9,6 +9,8 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { StatCard } from "@/components/ui/stat-card";
+import { TitleWithInfo } from "@/components/ui/title-with-info";
+import { TITLE_EXPLANATIONS } from "@/lib/content/title-explanations";
 import type { AgentAnswer, Trace } from "@/types/domain";
 
 type AgentApiResponse = {
@@ -52,7 +54,12 @@ export function LiveDemo() {
   return (
     <section className="space-y-4">
       <Card className="space-y-4 border-slate-300">
-        <h2 className="text-xl font-semibold text-slate-900">Live Support Agent Demo</h2>
+        <TitleWithInfo
+          as="h2"
+          className="text-xl font-semibold text-slate-900"
+          title="Live Support Agent Demo"
+          info={TITLE_EXPLANATIONS.landing_demo}
+        />
         <p className="text-sm text-slate-600">
           Ask a customer support question. The agent returns a source-grounded answer, citations, confidence, latency,
           cost estimate, and escalation recommendation.

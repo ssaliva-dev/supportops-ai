@@ -5,7 +5,7 @@ import { StatCard } from "@/components/ui/stat-card";
 import { TitleWithInfo } from "@/components/ui/title-with-info";
 import { TITLE_EXPLANATIONS } from "@/lib/content/title-explanations";
 import { ensureSeededData } from "@/lib/seed/ensureSeeded";
-import { knowledgeStore, runStore } from "@/lib/store";
+import { getStoreWarnings, knowledgeStore, runStore } from "@/lib/store";
 
 export default async function HomePage() {
   await ensureSeededData();
@@ -22,6 +22,9 @@ export default async function HomePage() {
     : 0;
 
   const openEscalations = escalations.filter((item) => !item.resolved).length;
+  const escalationRate = traces.length ? (escalations.length / traces.length) * 100 : 0;
+  const latestModel = traces[0]?.model ?? "no runs yet";
+  const storeWarnings = getStoreWarnings();
 
   return (
     <div className="space-y-6">
@@ -39,6 +42,11 @@ export default async function HomePage() {
           SupportOps AI demonstrates RAG retrieval, source-grounded generation, deterministic evaluations, human-in-the-loop
           escalation, and operational traces with latency and cost tracking.
         </p>
+        {storeWarnings.length > 0 ? (
+          <div className="rounded-md border border-amber-300/40 bg-amber-100/10 px-3 py-2 text-xs text-amber-100">
+            {storeWarnings[0]}
+          </div>
+        ) : null}
         <div className="flex flex-wrap gap-2 text-xs font-medium text-slate-100">
           <span className="rounded-full bg-white/15 px-3 py-1">RAG + Retrieval Scoring</span>
           <span className="rounded-full bg-white/15 px-3 py-1">Source Citations</span>
@@ -48,11 +56,13 @@ export default async function HomePage() {
         </div>
       </Card>
 
-      <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-5">
+      <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-7">
         <StatCard label="Knowledge Articles" value={String(articles.length)} />
         <StatCard label="Indexed Chunks" value={String(chunks.length)} />
         <StatCard label="Recent Agent Runs" value={String(traces.length)} />
+        <StatCard label="Latest Model" value={latestModel} />
         <StatCard label="Avg Latency" value={`${averageLatency} ms`} />
+        <StatCard label="Escalation Rate" value={`${escalationRate.toFixed(1)}%`} />
         <StatCard label="Open Escalations" value={String(openEscalations)} />
       </div>
 
